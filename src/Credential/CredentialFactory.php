@@ -3,8 +3,7 @@
 namespace Gertoska\OAuth2Request\Credential;
 
 /**
- * Class CredencialFactory
- * @package Gertoska\OAuth2Request\Credential
+ * Class CredencialFactory.
  */
 class CredentialFactory
 {
@@ -31,17 +30,17 @@ class CredentialFactory
     }
 
     /**
-     * @param string $uri
-     * @param string $authorization
-     * @param string $grantType
-     * @param string $username
-     * @param string $password
+     * @param string      $uri
+     * @param string      $authorization
+     * @param string      $grantType
+     * @param string      $username
+     * @param string      $password
      * @param string|null $accessToken
      * @param string|null $tokenType
      * @param string|null $refreshToken
-     * @param int|null $expiresIn
+     * @param int|null    $expiresIn
      * @param string|null $scope
-     * @param int|null $obtainedIn
+     * @param int|null    $obtainedIn
      *
      * @return Credential
      */

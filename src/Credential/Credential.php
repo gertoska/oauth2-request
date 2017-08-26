@@ -3,8 +3,7 @@
 namespace Gertoska\OAuth2Request\Credential;
 
 /**
- * Class Credential
- * @package Gertoska\OAuth2Request\Credential
+ * Class Credential.
  */
 class Credential
 {
@@ -66,17 +65,17 @@ class Credential
     /**
      * AccessData constructor.
      *
-     * @param string $uri
-     * @param string $authorization
-     * @param string $grantType
-     * @param string $username
-     * @param string $password
+     * @param string      $uri
+     * @param string      $authorization
+     * @param string      $grantType
+     * @param string      $username
+     * @param string      $password
      * @param string|null $accessToken
      * @param string|null $tokenType
      * @param string|null $refreshToken
-     * @param int|null $expiresIn
+     * @param int|null    $expiresIn
      * @param string|null $scope
-     * @param int|null $obtainedIn
+     * @param int|null    $obtainedIn
      */
     public function __construct(
         string $uri,
@@ -196,9 +195,9 @@ class Credential
      * @param string $accessToken
      * @param string $tokenType
      * @param string $refreshToken
-     * @param int $expiresIn
+     * @param int    $expiresIn
      * @param string $scope
-     * @param int $obtainedIn
+     * @param int    $obtainedIn
      *
      * @return Credential
      */
@@ -225,7 +224,7 @@ class Credential
      */
     public function checkIfIsNotNecessaryToRefreshToken()
     {
-        return (null !== $this->accessToken() && !$this->hasExpired());
+        return null !== $this->accessToken() && !$this->hasExpired();
     }
 
     /**
@@ -233,6 +232,6 @@ class Credential
      */
     public function hasExpired()
     {
-        return (null === $this->expiresIn || microtime(true) - $this->obtainedIn >= $this->expiresIn);
+        return null === $this->expiresIn || microtime(true) - $this->obtainedIn >= $this->expiresIn;
     }
 }
