@@ -225,7 +225,7 @@ class Credential
      */
     public function checkIfIsNotNecessaryToRefreshToken()
     {
-        return (null !== $this->accessToken() && !$this->hasExpired());
+        return null !== $this->accessToken() && !$this->hasExpired();
     }
 
     /**
@@ -233,6 +233,6 @@ class Credential
      */
     public function hasExpired()
     {
-        return (null === $this->expiresIn || microtime(true) - $this->obtainedIn >= $this->expiresIn);
+        return null === $this->expiresIn || microtime(true) - $this->obtainedIn >= $this->expiresIn;
     }
 }
