@@ -74,32 +74,17 @@ class Request
         );
     }
 
+    
     /**
      * @param string $path
+     * @param array|null $params
+     * @param bool $body
      *
      * @return mixed
      */
-    public function get(string $path)
+    public function request(string $method, string $path, array $params = null, bool $body = true)
     {
-        $response = $this->client->request('get', $this->credential->uri() . $path, [
-            'headers' => [
-                'cache-control' => 'no-cache',
-                'authorization' => 'Bearer ' . $this->credential->accessToken()
-            ],
-        ]);
-
-        return json_decode((string) $response->getBody());
-    }
-
-    /**
-     * @param string $path
-     * @param array $params
-     *
-     * @return mixed
-     */
-    public function post(string $path, array $params)
-    {
-        $response = $this->client->request('post', $this->credential->uri() . $path, [
+        $response = $this->client->request($method, $this->credential->uri() . $path, [
             'headers' => [
                 'cache-control' => 'no-cache',
                 'authorization' => 'Bearer ' . $this->credential->accessToken()
@@ -107,35 +92,10 @@ class Request
             'json' => $params
         ]);
 
-        return json_decode((string) $response->getBody());
-    }
-
-    /**
-     * @param string $path
-     * @param array $params
-     *
-     * @return mixed
-     */
-    public function put(string $path, array $params)
-    {
-        $response = $this->client->request('put', $this->credential->uri() . $path, [
-            'headers' => [
-                'cache-control' => 'no-cache',
-                'authorization' => 'Bearer ' . $this->credential->accessToken()
-            ],
-            'json' => $params
-        ]);
-
-        return json_decode((string) $response->getStatusCode());
-    }
-
-    public function patch()
-    {
-        // TODO: Implement patch() method.
-    }
-
-    public function delete()
-    {
-        // TODO: Implement delete() method.
+        if ($body) {
+            return json_decode((string)$response->getBody());
+        } else {
+            return json_decode((string)$response->getStatusCode());
+        }
     }
 }
