@@ -117,7 +117,9 @@ class Credential
      */
     public function authorization()
     {
-        return (base64_encode(base64_decode($this->authorization)) !== $this->authorization) ? base64_encode($this->authorization) : $this->authorization;
+        $auth = $this->authorization;
+        
+        return (base64_encode(base64_decode($auth)) !== $auth) ? base64_encode($auth) : $auth;
     }
 
     /**
