@@ -43,7 +43,7 @@ class Request
     /**
      * @return Credential
      */
-    public function getOrRefreshAccessToken()
+    public function getOrRefreshAccessToken(): Credential
     {
         if ($this->credential->checkIfIsNotNecessaryToRefreshToken()) {
             return $this->credential;
@@ -76,6 +76,7 @@ class Request
 
     
     /**
+     * @param string $method
      * @param string $path
      * @param array|null $params
      * @param bool $body

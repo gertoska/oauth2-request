@@ -13,7 +13,7 @@ class CredentialFactory
      *
      * @return Credential
      */
-    public function buildFromArray(array $params)
+    public function buildFromArray(array $params): Credential
     {
         return $this->build(
             $params['uri'],
@@ -57,7 +57,7 @@ class CredentialFactory
         int $expiresIn = null,
         string $scope = null,
         int $obtainedIn = null
-    ) {
+    ) : Credential {
         return new Credential(
             $uri,
             $authorization,

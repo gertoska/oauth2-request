@@ -1,3 +1,5 @@
-build
+.idea/
 composer.lock
 vendor
+coverage/
+coverage.clover

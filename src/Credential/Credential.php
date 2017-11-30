@@ -107,7 +107,7 @@ class Credential
     /**
      * @return string
      */
-    public function uri()
+    public function uri(): string
     {
         return $this->uri;
     }
@@ -115,7 +115,7 @@ class Credential
     /**
      * @return string
      */
-    public function authorization()
+    public function authorization(): string
     {
         $auth = $this->authorization;
         
@@ -125,7 +125,7 @@ class Credential
     /**
      * @return string
      */
-    public function grantType()
+    public function grantType(): string
     {
         return $this->grantType;
     }
@@ -133,7 +133,7 @@ class Credential
     /**
      * @return string
      */
-    public function username()
+    public function username(): string
     {
         return $this->username;
     }
@@ -141,7 +141,7 @@ class Credential
     /**
      * @return string
      */
-    public function password()
+    public function password(): string
     {
         return $this->password;
     }
@@ -149,7 +149,7 @@ class Credential
     /**
      * @return string|null
      */
-    public function accessToken()
+    public function accessToken():? string
     {
         return $this->accessToken;
     }
@@ -157,7 +157,7 @@ class Credential
     /**
      * @return string|null
      */
-    public function tokenType()
+    public function tokenType():? string
     {
         return $this->tokenType;
     }
@@ -165,7 +165,7 @@ class Credential
     /**
      * @return string|null
      */
-    public function refreshToken()
+    public function refreshToken():? string
     {
         return $this->refreshToken;
     }
@@ -173,7 +173,7 @@ class Credential
     /**
      * @return int|null
      */
-    public function expiresIn()
+    public function expiresIn():? int
     {
         return $this->expiresIn;
     }
@@ -181,7 +181,7 @@ class Credential
     /**
      * @return string|null
      */
-    public function scope()
+    public function scope():? string
     {
         return $this->scope;
     }
@@ -189,7 +189,7 @@ class Credential
     /**
      * @return int|null
      */
-    public function obtainedIn()
+    public function obtainedIn():? int
     {
         return $this->obtainedIn;
     }
@@ -211,7 +211,7 @@ class Credential
         int $expiresIn,
         string $scope,
         int $obtainedIn
-    ) {
+    ) : Credential {
         $this->accessToken = $accessToken;
         $this->tokenType = $tokenType;
         $this->refreshToken = $refreshToken;
@@ -225,7 +225,7 @@ class Credential
     /**
      * @return bool
      */
-    public function checkIfIsNotNecessaryToRefreshToken()
+    public function checkIfIsNotNecessaryToRefreshToken(): bool
     {
         return null !== $this->accessToken() && !$this->hasExpired();
     }
@@ -233,7 +233,7 @@ class Credential
     /**
      * @return bool
      */
-    public function hasExpired()
+    public function hasExpired(): bool
     {
         return null === $this->expiresIn || microtime(true) - $this->obtainedIn >= $this->expiresIn;
     }
