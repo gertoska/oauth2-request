@@ -15,7 +15,7 @@ class CredentialFactory
      */
     public function buildFromArray(array $params): Credential
     {
-        return $this->build(
+        return new Credential(
             $params['uri'],
             $params['authorization'],
             $params['grantType'],
@@ -27,49 +27,6 @@ class CredentialFactory
             isset($params['expiresIn']) ? $params['expiresIn'] : null,
             isset($params['scope']) ? $params['scope'] : null,
             isset($params['obtainedIn']) ? $params['obtainedIn'] : null
-        );
-    }
-
-    /**
-     * @param string $uri
-     * @param string $authorization
-     * @param string $grantType
-     * @param string $username
-     * @param string $password
-     * @param string|null $accessToken
-     * @param string|null $tokenType
-     * @param string|null $refreshToken
-     * @param int|null $expiresIn
-     * @param string|null $scope
-     * @param int|null $obtainedIn
-     *
-     * @return Credential
-     */
-    private function build(
-        string $uri,
-        string $authorization,
-        string $grantType,
-        string $username,
-        string $password,
-        string $accessToken = null,
-        string $tokenType = null,
-        string $refreshToken = null,
-        int $expiresIn = null,
-        string $scope = null,
-        int $obtainedIn = null
-    ) : Credential {
-        return new Credential(
-            $uri,
-            $authorization,
-            $grantType,
-            $username,
-            $password,
-            $accessToken,
-            $tokenType,
-            $refreshToken,
-            $expiresIn,
-            $scope,
-            $obtainedIn
         );
     }
 }
