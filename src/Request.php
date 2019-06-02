@@ -53,7 +53,7 @@ final class Request
             $response->refresh_token,
             $response->expires_in,
             $response->scope,
-            microtime(true)
+            (int) microtime(true)
         );
     }
 
