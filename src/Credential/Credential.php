@@ -1,83 +1,23 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Gertoska\OAuth2Request\Credential;
 
-/**
- * Class Credential
- * @package Gertoska\OAuth2Request\Credential
- */
-class Credential
+final class Credential
 {
-    /**
-     * @var string
-     */
     private $uri;
-
-    /**
-     * @var string
-     */
     private $authorization;
-
-    /**
-     * @var string
-     */
     private $grantType;
-
-    /**
-     * @var string
-     */
     private $username;
-
-    /**
-     * @var string
-     */
     private $password;
-
-    /**
-     * @var string|null
-     */
     private $accessToken;
-
-    /**
-     * @var string|null
-     */
     private $tokenType;
-
-    /**
-     * @var string|null
-     */
     private $refreshToken;
-
-    /**
-     * @var int|null
-     */
     private $expiresIn;
-
-    /**
-     * @var string|null
-     */
     private $scope;
-
-    /**
-     * @var int|null
-     */
     private $obtainedIn;
 
-    /**
-     * AccessData constructor.
-     *
-     * @param string $uri
-     * @param string $authorization
-     * @param string $grantType
-     * @param string $username
-     * @param string $password
-     * @param string|null $accessToken
-     * @param string|null $tokenType
-     * @param string|null $refreshToken
-     * @param int|null $expiresIn
-     * @param string|null $scope
-     * @param int|null $obtainedIn
-     */
     public function __construct(
         string $uri,
         string $authorization,
@@ -91,119 +31,76 @@ class Credential
         string $scope = null,
         int $obtainedIn = null
     ) {
-        $this->uri = $uri;
+        $this->uri           = $uri;
         $this->authorization = $authorization;
-        $this->grantType = $grantType;
-        $this->username = $username;
-        $this->password = $password;
-        $this->accessToken = $accessToken;
-        $this->tokenType = $tokenType;
-        $this->refreshToken = $refreshToken;
-        $this->expiresIn = $expiresIn;
-        $this->scope = $scope;
-        $this->obtainedIn = $obtainedIn;
+        $this->grantType     = $grantType;
+        $this->username      = $username;
+        $this->password      = $password;
+        $this->accessToken   = $accessToken;
+        $this->tokenType     = $tokenType;
+        $this->refreshToken  = $refreshToken;
+        $this->expiresIn     = $expiresIn;
+        $this->scope         = $scope;
+        $this->obtainedIn    = $obtainedIn;
     }
 
-    /**
-     * @return string
-     */
     public function uri(): string
     {
         return $this->uri;
     }
 
-    /**
-     * @return string
-     */
     public function authorization(): string
     {
         $auth = $this->authorization;
-        
+
         return (base64_encode(base64_decode($auth)) !== $auth) ? base64_encode($auth) : $auth;
     }
 
-    /**
-     * @return string
-     */
     public function grantType(): string
     {
         return $this->grantType;
     }
 
-    /**
-     * @return string
-     */
     public function username(): string
     {
         return $this->username;
     }
 
-    /**
-     * @return string
-     */
     public function password(): string
     {
         return $this->password;
     }
 
-    /**
-     * @return string|null
-     */
-    public function accessToken():? string
+    public function accessToken(): ?string
     {
         return $this->accessToken;
     }
 
-    /**
-     * @return string|null
-     */
-    public function tokenType():? string
+    public function tokenType(): ?string
     {
         return $this->tokenType;
     }
 
-    /**
-     * @return string|null
-     */
-    public function refreshToken():? string
+    public function refreshToken(): ?string
     {
         return $this->refreshToken;
     }
 
-    /**
-     * @return int|null
-     */
-    public function expiresIn():? int
+    public function expiresIn(): ?int
     {
         return $this->expiresIn;
     }
 
-    /**
-     * @return string|null
-     */
-    public function scope():? string
+    public function scope(): ?string
     {
         return $this->scope;
     }
 
-    /**
-     * @return int|null
-     */
-    public function obtainedIn():? int
+    public function obtainedIn(): ?int
     {
         return $this->obtainedIn;
     }
 
-    /**
-     * @param string $accessToken
-     * @param string $tokenType
-     * @param string $refreshToken
-     * @param int $expiresIn
-     * @param string $scope
-     * @param int $obtainedIn
-     *
-     * @return Credential
-     */
     public function setOAuth(
         string $accessToken,
         string $tokenType,
@@ -211,28 +108,22 @@ class Credential
         int $expiresIn,
         string $scope,
         int $obtainedIn
-    ) : Credential {
-        $this->accessToken = $accessToken;
-        $this->tokenType = $tokenType;
+    ): Credential {
+        $this->accessToken  = $accessToken;
+        $this->tokenType    = $tokenType;
         $this->refreshToken = $refreshToken;
-        $this->expiresIn = $expiresIn;
-        $this->scope = $scope;
-        $this->obtainedIn = $obtainedIn;
+        $this->expiresIn    = $expiresIn;
+        $this->scope        = $scope;
+        $this->obtainedIn   = $obtainedIn;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function checkIfIsNotNecessaryToRefreshToken(): bool
     {
         return null !== $this->accessToken() && !$this->hasExpired();
     }
 
-    /**
-     * @return bool
-     */
     public function hasExpired(): bool
     {
         return null === $this->expiresIn || microtime(true) - $this->obtainedIn >= $this->expiresIn;

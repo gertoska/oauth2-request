@@ -1,16 +1,14 @@
 <?php
 
-namespace Gertoska\OAuth2Request\Test;
+declare(strict_types = 1);
+
+namespace Tests\Credential;
 
 use Gertoska\OAuth2Request\Credential\Credential;
 use Gertoska\OAuth2Request\Credential\CredentialFactory;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
-/**
- * Class CredentialTest
- * @package Gertoska\OAuth2Request\Test
- */
-class CredentialFactoryTest extends TestCase
+final class CredentialFactoryTest extends TestCase
 {
     const URI = 'https://www.github.com';
     const AUTHORIZATION = 'WW91IGhhdmUgZGlzY292ZXJlZCB0aGUgc2VjcmV0IQ==';
@@ -22,10 +20,10 @@ class CredentialFactoryTest extends TestCase
     const REFRESH_TOKEN = 'MY_R3FR3S_T0K3N';
     const EXPIRES_IN = 80;
     const SCOPE = 'read write';
-    const OBTAINED_IN = '1503934696';
+    const OBTAINED_IN = 1503934696;
 
 
-    public function testBuildFromMinimalArray()
+    public function testBuildFromMinimalArray(): void
     {
         $credentialFactory = new CredentialFactory();
         $myArray = [
@@ -39,7 +37,7 @@ class CredentialFactoryTest extends TestCase
         $this->assertInstanceOf(Credential::class, $credentialFactory->buildFromArray($myArray));
     }
 
-    public function testBuildFromCompleteArray()
+    public function testBuildFromCompleteArray(): void
     {
         $credentialFactory = new CredentialFactory();
         $myArray = [

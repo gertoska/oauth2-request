@@ -1,15 +1,13 @@
 <?php
 
-namespace Gertoska\OAuth2Request\Test;
+declare(strict_types = 1);
+
+namespace Tests\Credential;
 
 use Gertoska\OAuth2Request\Credential\Credential;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
-/**
- * Class CredentialTest
- * @package Gertoska\OAuth2Request\Test
- */
-class CredentialTest extends TestCase
+final class CredentialTest extends TestCase
 {
     const URI = 'https://www.github.com';
     const AUTHORIZATION = 'WW91IGhhdmUgZGlzY292ZXJlZCB0aGUgc2VjcmV0IQ==';
@@ -29,8 +27,10 @@ class CredentialTest extends TestCase
     private $credential;
 
 
-    public function setUp()
+    public function setUp(): void
     {
+        parent::setUp();
+
         $this->credential = new Credential(
             self::URI,
             self::AUTHORIZATION,
@@ -47,73 +47,73 @@ class CredentialTest extends TestCase
     }
 
 
-    public function testUri()
+    public function testUri(): void
     {
         $this->assertSame(self::URI, $this->credential->uri());
     }
 
 
-    public function testAuthorization()
+    public function testAuthorization(): void
     {
         $this->assertSame(self::AUTHORIZATION, $this->credential->authorization());
     }
 
 
-    public function testGrantType()
+    public function testGrantType(): void
     {
         $this->assertSame(self::GRANT_TYPE, $this->credential->grantType());
     }
 
 
-    public function testUsername()
+    public function testUsername(): void
     {
         $this->assertSame(self::USERNAME, $this->credential->username());
     }
 
 
-    public function testPassword()
+    public function testPassword(): void
     {
         $this->assertSame(self::PASSWORD, $this->credential->password());
     }
 
 
-    public function testAccessToken()
+    public function testAccessToken(): void
     {
         $this->assertSame(self::ACCESS_TOKEN, $this->credential->accessToken());
     }
 
 
-    public function testTokenType()
+    public function testTokenType(): void
     {
         $this->assertSame(self::TOKEN_TYPE, $this->credential->tokenType());
     }
 
 
-    public function testRefreshToken()
+    public function testRefreshToken(): void
     {
         $this->assertSame(self::REFRESH_TOKEN, $this->credential->refreshToken());
     }
 
 
-    public function testExpiresIn()
+    public function testExpiresIn(): void
     {
         $this->assertSame(self::EXPIRES_IN, $this->credential->expiresIn());
     }
 
 
-    public function testScope()
+    public function testScope(): void
     {
         $this->assertSame(self::SCOPE, $this->credential->scope());
     }
 
 
-    public function testObtainedIn()
+    public function testObtainedIn(): void
     {
         $this->assertSame(self::OBTAINED_IN, $this->credential->obtainedIn());
     }
 
 
-    public function testSetOAuth()
+    public function testSetOAuth(): void
     {
         $this->assertSame($this->credential, $this->credential->setOAuth(
             self::ACCESS_TOKEN,
@@ -126,13 +126,13 @@ class CredentialTest extends TestCase
     }
 
 
-    public function testFalseCheckIfIsNotNecessaryToRefreshToken()
+    public function testFalseCheckIfIsNotNecessaryToRefreshToken(): void
     {
         $this->assertSame(false, $this->credential->checkIfIsNotNecessaryToRefreshToken());
     }
 
 
-    public function testTrueCheckIfIsNotNecessaryToRefreshToken1()
+    public function testTrueCheckIfIsNotNecessaryToRefreshToken1(): void
     {
         $credential = new Credential(
             self::URI,

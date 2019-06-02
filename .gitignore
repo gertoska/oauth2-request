@@ -3,3 +3,4 @@ composer.lock
 vendor
 coverage/
 coverage.clover
+.phpunit.result.cache

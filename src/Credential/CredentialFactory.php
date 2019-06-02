@@ -1,21 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Gertoska\OAuth2Request\Credential;
 
-/**
- * Class CredencialFactory
- * @package Gertoska\OAuth2Request\Credential
- */
-class CredentialFactory
+final class CredentialFactory
 {
-    /**
-     * @param array $params
-     *
-     * @return Credential
-     */
     public function buildFromArray(array $params): Credential
     {
-        return new Credential(
+        return $this->build(
             $params['uri'],
             $params['authorization'],
             $params['grantType'],
@@ -27,6 +20,34 @@ class CredentialFactory
             isset($params['expiresIn']) ? $params['expiresIn'] : null,
             isset($params['scope']) ? $params['scope'] : null,
             isset($params['obtainedIn']) ? $params['obtainedIn'] : null
+        );
+    }
+
+    private function build(
+        string $uri,
+        string $authorization,
+        string $grantType,
+        string $username,
+        string $password,
+        string $accessToken = null,
+        string $tokenType = null,
+        string $refreshToken = null,
+        int $expiresIn = null,
+        string $scope = null,
+        int $obtainedIn = null
+    ): Credential {
+        return new Credential(
+            $uri,
+            $authorization,
+            $grantType,
+            $username,
+            $password,
+            $accessToken,
+            $tokenType,
+            $refreshToken,
+            $expiresIn,
+            $scope,
+            $obtainedIn
         );
     }
 }
